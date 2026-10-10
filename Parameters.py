@@ -37,11 +37,13 @@ class BayDynamo(waq_scenario.Scenario):
         data = xr.open_dataset('initial_conitions_IM1S1_IM2S1_IM3S1.nc')
         
         nlayer=10
-        values = np.tile(data.IM1S1.values, nlayer)
+        values1 = np.tile(data.IM1S1.values, nlayer)
+        values2 = np.tile(data.IM2S1.values, nlayer)
+        values3 = np.tile(data.IM3S1.values, nlayer)
 
-        subs['IM1S1'] = Sub(initial=IC(seg_values=values), active=False) # spatially varying initial condition
-        subs['IM2S1'] = Sub(initial=IC(seg_values=values), active=False) # spatially varying initial condition
-        subs['IM3S1'] = Sub(initial=IC(seg_values=values), active=False) # spatially varying initial condition
+        subs['IM1S1'] = Sub(initial=IC(seg_values=values1), active=False) # spatially varying initial condition
+        subs['IM2S1'] = Sub(initial=IC(seg_values=values2), active=False) # spatially varying initial condition
+        subs['IM3S1'] = Sub(initial=IC(seg_values=values3), active=False) # spatially varying initial condition
         
         return subs
 
