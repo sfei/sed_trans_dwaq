@@ -1,0 +1,16 @@
+boundary_defs.txt
+com-*
+delwaq1.out
+delwaq2.out
+delwaq.rtn
+exch_to_2d_link.csv
+flowgeom.nc
+forcing/
+initial-*
+links.csv
+__pycache__/
+*.waq
+*.wrk
+*.seg
+sfbay_dynamo000*
+memory_map.out

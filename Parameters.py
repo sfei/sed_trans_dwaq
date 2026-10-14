@@ -61,22 +61,27 @@ class BayDynamo(waq_scenario.Scenario):
         params["ACTIVE_DynDepth"]=PC(1)
         params["ACTIVE_TotDepth"]=PC(1)
         params["ACTIVE_VertDisp"]=PC(1)
+        params["ACTIVE_Veloc"]=PC(1) 
 
-        # from jill and mick model
-        params['ACTIVE_Res_Pickup']=PC(0)
-        params['ACTIVE_Sed_IM1']=PC(0)
-        params['ACTIVE_Res_IM1']=PC(0)
-        params['ACTIVE_Sed_IM2']=PC(0)
-        params['ACTIVE_Res_IM2']=PC(0)
-        params['ACTIVE_Sed_IM3']=PC(0)
-        params['ACTIVE_Res_IM3']=PC(0)
-        #;CONSTANTS 'ACTIVE_CalVS_IM1' DATA 0
-        #;CONSTANTS 'ACTIVE_CalVS_IM2' DATA 0
-        params['ACTIVE_DynDepth']=PC(0)
-        params['ACTIVE_Res_DM']=PC(0)
-        params['ACTIVE_S1_Comp']=PC(0)
-        params['ACTIVE_S2_Comp']=PC(0)
-        params['ACTIVE_Compos']=PC(0)
-        params['ACTIVE_TotDepth']=PC(0)
+        # Sedimentation IM1
+        params['ACTIVE_Sed_IM1']=PC(1) 
+        params['ACTIVE_Sed_IM2']=PC(1)
+        params['ACTIVE_Sed_IM3']=PC(1)           
+
+        # resuspension old names replaced by S12TraIM1 etc.
+        #params['ACTIVE_Res_IM1']=PC(1) 
+        #params['ACTIVE_Res_IM2']=PC(1)  
+        #params['ACTIVE_Res_IM3']=PC(1) 
+        params['ACTIVE_S12TraIM1']=PC(1) 
+        params['ACTIVE_S12TraIM2']=PC(1)
+        params['ACTIVE_S12TraIM3']=PC(1)  
+
+
+        # these are needed for S12TraIM1 etc to work
+        params['ACTIVE_Res_Pickup']=PC(1) # van Rijn pickup in layer 2
+        params['ACTIVE_Res_DM']=PC(1)
+        params['ACTIVE_S1_Comp']=PC(1)
+        params['ACTIVE_S2_Comp']=PC(1)
+        params['ACTIVE_Compos']=PC(1)
               
         return params

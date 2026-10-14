@@ -178,8 +178,6 @@ class Scen(BayDynamo.BayDynamo):
         params=super(Scen,self).init_parameters()
           
         params['CLOSE_ERR']=PC(1) # ; If defined, allow delwaq to correct water volumes to keep concentrations continuous
-        params['NOTHREADS']=PC(4) # ; Number of threads used by delwaq, equal number of substances
-        params['DRY_THRESH']=PC(0.001) # ; Dry cell threshold
         params['maxiter']=PC(100) # ; Maximum number of iterations
         params['tolerance']=PC(1E-07) # ; Convergence tolerance
         params['iteration report']=PC(0) # ; Write iteration report (when 1) or not (when 0)
@@ -198,9 +196,6 @@ class Scen(BayDynamo.BayDynamo):
         #;CONSTANTS 'MaxResPup' DATA 1E+20
         #;CONSTANTS 'FactResPup' DATA 1.75E-07
         params['VSedIM1']=PC(86.4) # ; follows from D3D
-        params['CrSS']=PC(25)
-        params['nIM1']=PC(0.1)
-        params['Temp']=PC(10)
         params['TaucSIM1']=PC(1000) #  ;follows from D3D
         #;CONSTANTS 'FrIM1SedS2' DATA 0.1
         #;CONSTANTS 'FrTIMS2Max' DATA 1
@@ -218,11 +213,8 @@ class Scen(BayDynamo.BayDynamo):
         params['VResIM2']=PC(100) # ; 0.4
         params['TaucRS1IM2']=PC(0.1) # ; follows from d3d
         #;CONSTANTS 'TaucRS2IM2' DATA 1000
-        params['Manncoef']=PC(0.025) # ; follows from d3d 
-        params['SwChezy']=PC(2) # ; follows from d3d
         params['psedminIM2']=PC(1.00E-01)
         params['VSedIM3']=PC(2246.4) # ; follows from D3D
-        params['nIM3']=PC(0.1)
         params['TaucSIM3']=PC(1000) #  ;follows from D3D
         params['SWResIM3']=PC(1)
         params['ZResIM3']=PC(86.400) # ; 10% of D3D
@@ -232,7 +224,17 @@ class Scen(BayDynamo.BayDynamo):
         #;CONSTANTS 'ZResDM' DATA 2246.4
         #;CONSTANTS 'VResDM' DATA 0.4
         #;CONSTANTS 'fResS1DM' DATA 86.400
-        
+
+        # comment these out because lsp file says "is not used by the proces system"
+        # params['NOTHREADS']=PC(4) # ; Number of threads used by delwaq, equal number of substances
+        # params['DRY_THRESH']=PC(0.001) # ; Dry cell threshold
+        # params['CrSS']=PC(25)
+        # params['nIM1']=PC(0.1)
+        # params['Temp']=PC(10)
+        # params['Manncoef']=PC(0.025) # ; follows from d3d 
+        # params['SwChezy']=PC(2) # ; follows from d3d
+        # params['nIM3']=PC(0.1)
+
         return params
         
     def cmd_default(self):
@@ -252,10 +254,14 @@ class Scen(BayDynamo.BayDynamo):
     def __init__(self,*a,**k):
         super(Scen,self).__init__(*a,**k)
 
-        extra_fields=('TotalDepth',
-                      'volume',
-                      'depth',
-                      'tau') 
+        extra_fields=('Tau','TotalDepth','Depth','Velocity','TIM', 
+                      'FrIM1S2Pup','fRIM2S2Pup','fRIM3S2Pup',
+                      'Pshields','FrTIMS2','PSedIM1','fSedIM1',
+                      'fSedIM1S2','fResS1IM1','fResS2IM1','PSedIM2','fSedIM2',
+                      'fSedIM2S2','FrIM2S1','FrIM2S2','fResS1IM2','fResS2IM2',
+                      'PSedIM3','fSedIM3','fSedIM3S2','FrIM3S1','FrIM3S2',
+                      'fResS1IM3','fResS2IM3')                                             
+                                    
                      
         self.map_output+=extra_fields
 
