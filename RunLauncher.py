@@ -24,7 +24,7 @@ reload(BayDynamo)
 
 # set the simulation time period and point to the hydro input files
 sim_dates = pd.to_datetime(['2015-08-01 00:00:00','2016-10-01 00:00:00'])  
-hydro_path = '/fortcollinsvol2/hpcshared/sed_trans/whole_bay_model/hydro/wy2016-fetchwaves/runs/wy2016-fetchwaves/DFM_DELWAQ_wy2016-fetchwaves_bound_temp_salt/wy2016-fetchwaves.hyd'
+hydro_path = '/fortcollinsvol2/hpcshared/sed_trans/whole_bay_model/hydro/wy2016-fetchwaves/runs/wy2016-fetchwaves-sigma/DFM_DELWAQ_wy2016-fetchwaves-sigma_bound_temp_salt/wy2016-fetchwaves-sigma.hyd'
 
 # mallard island ssc from lester
 df=pd.read_csv('Mallard_v20.csv')
@@ -132,17 +132,20 @@ class Scen(BayDynamo.BayDynamo):
                                   value=1.0))
         
         # use lester's spreadsheet for delta sources and partition
-        # 12% Mud, 58% Big Flocs, 30% Sand  
+        # 12% Big Flocs, 58% Mud, 30% Sand  
         for k in self.delta_sources: 
                 
-            self.src_tags.append(dict(tracer='IM1',
+            # mud
+            self.src_tags.append(dict(tracer='IM2',
                                       items=k,
                                       value=0.12*df_mallard))
             
-            self.src_tags.append(dict(tracer='IM2',
+            # big flocs
+            self.src_tags.append(dict(tracer='IM1',
                                       items=k,
                                       value=0.58*df_mallard))
 
+            # sand
             self.src_tags.append(dict(tracer='IM3',
                                       items=k,
                                       value=0.30*df_mallard)) 
@@ -157,14 +160,17 @@ class Scen(BayDynamo.BayDynamo):
             df_ssc.index = pd.DatetimeIndex(data_fresh.time)
             df_ssc.index.name='time'
 
-            self.src_tags.append(dict(tracer='IM1',
+            # mud
+            self.src_tags.append(dict(tracer='IM2',
                                       items=k,
                                       value=df_ssc['ssc_clay_mg_L']))
             
-            self.src_tags.append(dict(tracer='IM2',
+            # big flocs
+            self.src_tags.append(dict(tracer='IM1',
                                       items=k,
                                       value=df_ssc['ssc_silt_mg_L']))
 
+            # sand
             self.src_tags.append(dict(tracer='IM3',
                                       items=k,
                                       value=df_ssc['ssc_sand_mg_L'])) 
