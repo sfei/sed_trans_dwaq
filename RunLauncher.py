@@ -278,11 +278,11 @@ class Scen(BayDynamo.BayDynamo):
         self.mon_output = ()#('TotalDepth')
         
         DAILY=1000000
-        self.map_time_step=1000000#60000#DAILY # daily
+        self.map_time_step=6000 # every 60 min. 1000000 # daily
 #        self.mon_time_step=10000 # every 100 min.
 #        self.hist_time_step=10000 # every 100 min
-        self.mon_time_step= 1000000#1000000 # daily # 6000 # every 60 min. -- format here mmss - this is not an integer specification of time!!
-        self.hist_time_step=3000 # every 60 min        
+        self.mon_time_step= 1000000 # daily # 6000 # every 60 min. -- format here mmss - this is not an integer specification of time!!
+        self.hist_time_step=1000 # every 10 min        
         #self.add_usgs_transect_monitor() 
         self.add_usgs_monitor_areas()
         #self.add_disp()
